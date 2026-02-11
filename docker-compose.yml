@@ -1,0 +1,18 @@
+services:
+  claude-code:
+    build:
+      context: .
+      args:
+        USERNAME: developer
+        USER_UID: 1000
+        USER_GID: 1000
+    image: claude-code-dev
+    container_name: claude-code-dev
+    stdin_open: true
+    tty: true
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      # Mount your local project directory here
+      - ${PROJECT_DIR:-.}:/workspace
+    working_dir: /workspace

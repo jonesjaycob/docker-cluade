@@ -10,9 +10,12 @@ services:
     container_name: claude-code-dev
     stdin_open: true
     tty: true
-    environment:
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
     volumes:
       # Mount your local project directory here
       - ${PROJECT_DIR:-.}:/workspace
+      # Persist Claude login credentials between container restarts
+      - claude-auth:/home/developer/.claude
     working_dir: /workspace
+
+volumes:
+  claude-auth:

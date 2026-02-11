@@ -1,11 +1,6 @@
 services:
   claude-code:
-    build:
-      context: .
-      args:
-        USERNAME: developer
-        USER_UID: 1000
-        USER_GID: 1000
+    build: .
     image: claude-code-dev
     container_name: claude-code-dev
     stdin_open: true
@@ -14,7 +9,7 @@ services:
       # Mount your local project directory here
       - ${PROJECT_DIR:-.}:/workspace
       # Persist Claude login credentials between container restarts
-      - claude-auth:/home/developer/.claude
+      - claude-auth:/root/.claude
     working_dir: /workspace
 
 volumes:

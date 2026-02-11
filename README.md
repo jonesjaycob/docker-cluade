@@ -56,7 +56,6 @@ Claude Code is installed globally via npm.
 ## How It Works
 
 - Your local project directory is mounted at `/workspace` inside the container.
-- A non-root `developer` user (UID/GID 1000) runs all commands, with passwordless `sudo` available.
 - Login credentials are stored in a named Docker volume (`claude-auth`) so they persist across container restarts.
 
 ## Usage Examples
@@ -80,23 +79,6 @@ docker compose run --rm claude-code bash
 ```
 
 ## Customization
-
-### Matching your host user UID/GID
-
-If your host user isn't UID/GID 1000, update the build args in `docker-compose.yml` to avoid file permission issues on the mounted volume:
-
-```yaml
-build:
-  args:
-    USER_UID: 1001
-    USER_GID: 1001
-```
-
-Then rebuild:
-
-```bash
-docker compose build
-```
 
 ### Resetting your login
 
